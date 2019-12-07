@@ -58,14 +58,23 @@ namespace ProcessingApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<UserModel>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+            // Crete an Identity based on Application User and Application Role
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
+                options => options.Stores.MaxLengthForKeys = 128)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            ApplicationDbContext context,
+            RoleManager<ApplicationRole> roleManager,
+            UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -90,6 +99,8 @@ namespace ProcessingApp
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            AddUserData.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }
