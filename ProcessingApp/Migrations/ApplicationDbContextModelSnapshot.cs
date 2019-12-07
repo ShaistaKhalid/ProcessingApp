@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessingApp.Data;
 
-namespace ProcessingApp.Data.Migrations
+namespace ProcessingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191120214621_fifthMigration")]
-    partial class fifthMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,7 +170,8 @@ namespace ProcessingApp.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("OwnerName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.HasKey("OwnerId");
 
@@ -195,10 +194,6 @@ namespace ProcessingApp.Data.Migrations
                     b.Property<string>("PropertyAdress")
                         .IsRequired()
                         .HasMaxLength(60);
-
-                    b.Property<string>("PropertyDescription")
-                        .IsRequired()
-                        .HasMaxLength(50);
 
                     b.Property<string>("PropertyName")
                         .IsRequired()

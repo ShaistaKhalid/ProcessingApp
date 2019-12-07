@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessingApp.Data;
 
-namespace ProcessingApp.Data.Migrations
+namespace ProcessingApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191117011243_secondMigration")]
-    partial class secondMigration
+    [Migration("20191207051120_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,57 +63,6 @@ namespace ProcessingApp.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -186,6 +135,36 @@ namespace ProcessingApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProcessingApp.Models.ApplicationList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MyApplicationId");
+
+                    b.Property<int>("PropertyId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MyApplicationId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("ApplicationList");
+                });
+
+            modelBuilder.Entity("ProcessingApp.Models.MyApplication", b =>
+                {
+                    b.Property<int>("MyApplicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("MyApplicationId");
+
+                    b.ToTable("MyApplication");
+                });
+
             modelBuilder.Entity("ProcessingApp.Models.OwnerModel", b =>
                 {
                     b.Property<int>("OwnerId")
@@ -193,7 +172,8 @@ namespace ProcessingApp.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("OwnerName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.HasKey("OwnerId");
 
@@ -208,6 +188,8 @@ namespace ProcessingApp.Data.Migrations
 
                     b.Property<string>("City")
                         .IsRequired();
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<int?>("OwnerId");
 
@@ -228,6 +210,65 @@ namespace ProcessingApp.Data.Migrations
                     b.ToTable("PropertyModel");
                 });
 
+            modelBuilder.Entity("ProcessingApp.Models.UserModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<int?>("MyApplicationId")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MyApplicationId");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -238,7 +279,7 @@ namespace ProcessingApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProcessingApp.Models.UserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -246,7 +287,7 @@ namespace ProcessingApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProcessingApp.Models.UserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -259,7 +300,7 @@ namespace ProcessingApp.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProcessingApp.Models.UserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -267,9 +308,22 @@ namespace ProcessingApp.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("ProcessingApp.Models.UserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProcessingApp.Models.ApplicationList", b =>
+                {
+                    b.HasOne("ProcessingApp.Models.MyApplication", "PersonalAccount")
+                        .WithMany("Applications")
+                        .HasForeignKey("MyApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProcessingApp.Models.PropertyModel", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -278,6 +332,14 @@ namespace ProcessingApp.Data.Migrations
                     b.HasOne("ProcessingApp.Models.OwnerModel", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("ProcessingApp.Models.UserModel", b =>
+                {
+                    b.HasOne("ProcessingApp.Models.MyApplication", "MyApplication")
+                        .WithMany()
+                        .HasForeignKey("MyApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
