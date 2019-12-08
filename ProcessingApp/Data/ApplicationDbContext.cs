@@ -20,8 +20,8 @@ namespace ProcessingApp.Data
             
         }
         public DbSet<ProcessingApp.Models.OwnerModel> OwnerModel { get; set; }
-        public DbSet<ProcessingApp.Models.PropertyModel> PropertyModel { get; set; }
+        public DbSet<ProcessingApp.Models.PropertyModel> PropertyCreateViewModel { get; set; }
         public DbSet<ProcessingApp.Models.MyApplication> MyApplication { get; set; }
-
+      
     }
 }

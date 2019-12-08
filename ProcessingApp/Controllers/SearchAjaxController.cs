@@ -35,7 +35,7 @@ namespace ProcessingApp.Controllers
         {
             
             return _context
-                .PropertyModel
+                .PropertyCreateViewModel
                 .Where(property => property.City
                             .ToLower()
                             .Contains(term.ToLower()))
