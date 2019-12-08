@@ -5,3 +5,12 @@
 $("#button").click(function () {
     $("#ajax").load("/ajax/getPartial");
 })
+
+$(function () {
+    $('#query').autocomplete({
+        source: "searchajax/autocomplete",
+        minLength: 2,
+        autoFocus: true
+    });
+});
+

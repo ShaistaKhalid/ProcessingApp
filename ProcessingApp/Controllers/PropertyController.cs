@@ -26,8 +26,9 @@ namespace ProcessingApp.Controllers
         }
 
 
-
+        [Authorize(Roles = "Applicant")]
         // GET: Property
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.PropertyModel.ToListAsync());
