@@ -4,12 +4,13 @@ body {padding-bottom: 20px;}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+    
     padding-left: 15px;
     padding-right: 15px;
 }
 
 /* Carousel */
-.carousel-caption p {
+    .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
@@ -72,3 +73,24 @@ a:active {
     background-color: gray;
     text-decoration: none; /* Removes the underline from the link on active links*/
 }
+
+/*footer css*/
+ footer .container.body-content {
+    bottom: 0; /* Keep the footer at the bottom.*/
+    position: fixed; /* Keep the footer fixed at the bottom.*/
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    opacity: 6%;
+    color: white;
+    text-align: center;
+}
+
+ /*About Page CSS*/
+/*.AboutPage_bg {
+    background: url("/images/AboutPageImage.jpg");
+    Center and scale the image nicely 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}*/
