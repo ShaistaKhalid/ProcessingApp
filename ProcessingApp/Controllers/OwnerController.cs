@@ -20,7 +20,7 @@ namespace ProcessingApp.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Owner, Admin")]
         // GET: Owner
         public async Task<IActionResult> Index()
         {
