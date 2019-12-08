@@ -26,7 +26,7 @@ namespace ProcessingApp.Controllers
         }
 
 
-        [Authorize(Roles = "Applicant")]
+        [Authorize(Roles = "Admin")]
         // GET: Property
 
         public async Task<IActionResult> Index()

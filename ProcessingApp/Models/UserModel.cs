@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProcessingApp.Models
 {
-    public class UserModel : IdentityUser
+    public class UserModel
     {
 
         public virtual String Name { get; set; }

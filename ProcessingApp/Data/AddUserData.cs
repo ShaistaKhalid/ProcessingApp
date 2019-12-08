@@ -64,7 +64,7 @@ namespace ProcessingApp.Data
                     await userManager.AddPasswordAsync(user, password);
                     await userManager.AddToRoleAsync(user, role1);
                 }
-                adminId1 = user.Id;
+                _ = user.Id;
             }
 
 
