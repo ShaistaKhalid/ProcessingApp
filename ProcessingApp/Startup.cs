@@ -55,6 +55,12 @@ namespace ProcessingApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            /*           services.AddMvc().AddRazorPagesOptions(options => {
+               options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
+           }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            */
+
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -98,6 +104,12 @@ namespace ProcessingApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                //this is another routing to completely separated page
+                routes.MapRoute(
+                    name: "customRoute",
+                    template: "customRoute/{controller}/{action}/{id?}");
+
             });
 
             AddUserData.Initialize(context, userManager, roleManager).Wait();
