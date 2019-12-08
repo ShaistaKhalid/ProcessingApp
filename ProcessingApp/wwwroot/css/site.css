@@ -4,12 +4,13 @@ body {padding-bottom: 20px;}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+    
     padding-left: 15px;
     padding-right: 15px;
 }
 
 /* Carousel */
-.carousel-caption p {
+    .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
@@ -31,6 +32,69 @@ body {padding-bottom: 20px;}
     }
 }
 .create-new-button{text-align:right}
+
+/*Index.cs styling*/
+.responsive
+{
+    max-width: 100%;
+    height: auto;
+}
+.container {
+    position: relative;
+    max-width: 800px; /* Maximum width */
+    margin: 0 auto; /* Center it */
+}
+
+    .container .content {
+        position: absolute; /* Position the background text */
+        bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+        background: rgb(0, 0, 0); /* Fallback color */
+        background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+        color: #f1f1f1; /* Grey text */
+        width: 100%; /* Full width */
+        padding: 40px; /* Some padding */
+    }
+
+a:link, a:visited {
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 14px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+a:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    text-decoration: none; /* Removes the underline from the links on hover */
+}
+a:active {
+    background-color: gray;
+    text-decoration: none; /* Removes the underline from the link on active links*/
+}
+
+/*footer css*/
+ footer .container.body-content {
+    bottom: 0; /* Keep the footer at the bottom.*/
+    position: fixed; /* Keep the footer fixed at the bottom.*/
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    opacity: 6%;
+    color: white;
+    text-align: center;
+}
+
+ /*About Page CSS*/
+/*.AboutPage_bg {
+    background: url("/images/AboutPageImage.jpg");
+    Center and scale the image nicely 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}*/
+
 #ui-id-1 {
     z-index: 9999;
 }
+
