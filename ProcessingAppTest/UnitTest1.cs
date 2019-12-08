@@ -1,14 +1,13 @@
 using System;
 using Xunit;
 
-namespace XUnitTestProject2
+namespace ProcessingAppTest
 {
     public class UnitTest1
     {
         [Fact]
         public void Test1()
         {
-
 
         }
     }

@@ -11,6 +11,7 @@ namespace ProcessingApp.ViewModels
     public class PropertyCreateViewModel
     {
 
+        //Just a test
            // Key1
         [Key]
         public virtual int PropertyId { get; set; }

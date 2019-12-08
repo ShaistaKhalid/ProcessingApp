@@ -8,7 +8,7 @@ using ProcessingApp.Models;
 
 namespace ProcessingApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<UserModel, IdentityRole, String>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public ApplicationDbContext()
         {
