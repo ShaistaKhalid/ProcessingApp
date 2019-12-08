@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProcessingApp.Models
 {
+    // extend IdentityUser
     public class ApplicationUser : IdentityUser
     {
+        //Define custom fields
         public ApplicationUser() : base() { }
         public string FirstName { get; set; }
         public string LastName { get; set; }

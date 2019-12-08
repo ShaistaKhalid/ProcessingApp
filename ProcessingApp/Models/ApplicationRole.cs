@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcessingApp.Models
 {
+    // Extend IdentityRole
     public class ApplicationRole : IdentityRole
     {
         public ApplicationRole() : base() { }
@@ -14,7 +15,7 @@ namespace ProcessingApp.Models
         {
 
         }
-
+        // Define a counstructor
         public ApplicationRole(string roleName, string description, DateTime creationDate) : base(roleName)
         {
             this.Description = description;
@@ -22,6 +23,7 @@ namespace ProcessingApp.Models
         }
 
         public string Description { get; set; }
+        // Get the creation date
         public DateTime CreationDate { get; set; }
     }
 }

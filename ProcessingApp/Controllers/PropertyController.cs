@@ -15,12 +15,10 @@ namespace ProcessingApp.Controllers
 {
     public class PropertyController : Controller
     {
-        public PropertyController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment hostingEnvironment;
+        private ApplicationDbContext dbContext;
 
         public PropertyController(ApplicationDbContext context,
                                   IHostingEnvironment hostingEnvironment)
