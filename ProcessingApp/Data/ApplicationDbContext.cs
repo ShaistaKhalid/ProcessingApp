@@ -31,8 +31,12 @@ namespace ProcessingApp.Data
                 new OwnerModel() { OwnerId = 1, OwnerName = "LLC Test"},
                 new OwnerModel() { OwnerId = 2, OwnerName = "Barsukov&Co" }
                 );
+            modelBuilder.Entity<PropertyModel>().HasData(
+                new { PropertyId = 12, PropertyName = "SeededHome", PropertyAdress = "SeedDrive", PropertyPrice = 95.5, City = "Seed", ImageUrl = "" }
+            );
         }
         // seed the data
+
         public DbSet<ProcessingApp.Models.ApplicationRole> ApplicationRole { get; set; }
     }
 }
