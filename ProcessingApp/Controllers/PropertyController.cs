@@ -18,7 +18,6 @@ namespace ProcessingApp.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment hostingEnvironment;
-        private ApplicationDbContext dbContext;
 
         public PropertyController(ApplicationDbContext context,
                                   IHostingEnvironment hostingEnvironment)
