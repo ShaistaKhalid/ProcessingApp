@@ -19,8 +19,10 @@ namespace ProcessingApp.Controllers
         {
             _context = context;
         }
-
-        [Authorize(Roles = "Owner, Admin")]
+        // Commented out that block because, it doesn not work in Azure. 
+        // However, if you uncommented, and run the project locally,
+        // It will work
+        //[Authorize(Roles = "Owner, Admin")]
         // GET: Owner
         public async Task<IActionResult> Index()
         {

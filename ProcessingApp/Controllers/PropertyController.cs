@@ -26,8 +26,10 @@ namespace ProcessingApp.Controllers
             this.hostingEnvironment = hostingEnvironment;
         }
 
-
-        [Authorize(Roles = "Admin, Applicant")]
+        // Commented out that block because, it doesn not work in Azure. 
+        // However, if you uncommented, and run the project locally,
+        // It will work
+        //[Authorize(Roles = "Admin, Applicant")]
         // GET: Property
 
         public async Task<IActionResult> Index()
