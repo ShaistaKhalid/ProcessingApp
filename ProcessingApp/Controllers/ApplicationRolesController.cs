@@ -11,88 +11,89 @@ using ProcessingApp.Models;
 
 namespace ProcessingApp.Controllers
 {
-    public class OwnerController : Controller
+    public class ApplicationRolesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public OwnerController(ApplicationDbContext context)
+        public ApplicationRolesController(ApplicationDbContext context)
         {
             _context = context;
         }
         // Commented out that block because, it doesn not work in Azure. 
         // However, if you uncommented, and run the project locally,
         // It will work
-        //[Authorize(Roles = "Owner, Admin")]
-        // GET: Owner
+        // Only admin
+        //[Authorize(Roles = "Admin")]
+        // GET: ApplicationRoles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.OwnerModel.ToListAsync());
+            return View(await _context.ApplicationRole.ToListAsync());
         }
 
-        // GET: Owner/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: ApplicationRoles/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ownerModel = await _context.OwnerModel
-                .FirstOrDefaultAsync(m => m.OwnerId == id);
-            if (ownerModel == null)
+            var applicationRole = await _context.ApplicationRole
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (applicationRole == null)
             {
                 return NotFound();
             }
 
-            return View(ownerModel);
+            return View(applicationRole);
         }
 
-        // GET: Owner/Create
+        // GET: ApplicationRoles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Owner/Create
+        // POST: ApplicationRoles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OwnerId,OwnerName")] OwnerModel ownerModel)
+        public async Task<IActionResult> Create([Bind("Description,CreationDate,Id,Name,NormalizedName,ConcurrencyStamp")] ApplicationRole applicationRole)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ownerModel);
+                _context.Add(applicationRole);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ownerModel);
+            return View(applicationRole);
         }
 
-        // GET: Owner/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: ApplicationRoles/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ownerModel = await _context.OwnerModel.FindAsync(id);
-            if (ownerModel == null)
+            var applicationRole = await _context.ApplicationRole.FindAsync(id);
+            if (applicationRole == null)
             {
                 return NotFound();
             }
-            return View(ownerModel);
+            return View(applicationRole);
         }
 
-        // POST: Owner/Edit/5
+        // POST: ApplicationRoles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OwnerId,OwnerName")] OwnerModel ownerModel)
+        public async Task<IActionResult> Edit(string id, [Bind("Description,CreationDate,Id,Name,NormalizedName,ConcurrencyStamp")] ApplicationRole applicationRole)
         {
-            if (id != ownerModel.OwnerId)
+            if (id != applicationRole.Id)
             {
                 return NotFound();
             }
@@ -101,12 +102,12 @@ namespace ProcessingApp.Controllers
             {
                 try
                 {
-                    _context.Update(ownerModel);
+                    _context.Update(applicationRole);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OwnerModelExists(ownerModel.OwnerId))
+                    if (!ApplicationRoleExists(applicationRole.Id))
                     {
                         return NotFound();
                     }
@@ -117,41 +118,41 @@ namespace ProcessingApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ownerModel);
+            return View(applicationRole);
         }
 
-        // GET: Owner/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: ApplicationRoles/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var ownerModel = await _context.OwnerModel
-                .FirstOrDefaultAsync(m => m.OwnerId == id);
-            if (ownerModel == null)
+            var applicationRole = await _context.ApplicationRole
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (applicationRole == null)
             {
                 return NotFound();
             }
 
-            return View(ownerModel);
+            return View(applicationRole);
         }
 
-        // POST: Owner/Delete/5
+        // POST: ApplicationRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var ownerModel = await _context.OwnerModel.FindAsync(id);
-            _context.OwnerModel.Remove(ownerModel);
+            var applicationRole = await _context.ApplicationRole.FindAsync(id);
+            _context.ApplicationRole.Remove(applicationRole);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OwnerModelExists(int id)
+        private bool ApplicationRoleExists(string id)
         {
-            return _context.OwnerModel.Any(e => e.OwnerId == id);
+            return _context.ApplicationRole.Any(e => e.Id == id);
         }
     }
 }

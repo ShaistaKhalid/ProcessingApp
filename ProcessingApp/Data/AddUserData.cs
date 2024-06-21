@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProcessingApp.Data
 {
+    // create new Admin, Owner and Applicant users
     public class AddUserData
     {
         public static async Task Initialize(ApplicationDbContext context,
@@ -28,6 +29,7 @@ namespace ProcessingApp.Data
 
             string password = "password";
 
+            // if the role is null, create a new one
             if (await roleManager.FindByNameAsync(role1) == null)
             {
                 await roleManager.CreateAsync(new ApplicationRole(role1, desc1, DateTime.Now));

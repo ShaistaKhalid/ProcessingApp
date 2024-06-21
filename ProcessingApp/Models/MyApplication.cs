@@ -12,6 +12,7 @@ namespace ProcessingApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public virtual int MyApplicationId { get; set; }
+        // list of all applications
         public virtual List<ApplicationList> Applications { get; set; }
     }
 }

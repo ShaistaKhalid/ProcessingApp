@@ -15,6 +15,7 @@ namespace ProcessingApp.Controllers
 {
     public class PropertyController : Controller
     {
+
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment hostingEnvironment;
 
@@ -25,13 +26,15 @@ namespace ProcessingApp.Controllers
             this.hostingEnvironment = hostingEnvironment;
         }
 
-
-        [Authorize(Roles = "Admin, Applicant")]
+        // Commented out that block because, it doesn not work in Azure. 
+        // However, if you uncommented, and run the project locally,
+        // It will work
+        //[Authorize(Roles = "Admin, Applicant")]
         // GET: Property
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PropertyModel.ToListAsync());
+            return View(await _context.PropertyCreateViewModel.ToListAsync());
         }
 
 
@@ -43,7 +46,7 @@ namespace ProcessingApp.Controllers
                 return NotFound();
             }
 
-            var propertyModel = await _context.PropertyModel
+            var propertyModel = await _context.PropertyCreateViewModel
                 .FirstOrDefaultAsync(m => m.PropertyId == id);
             if (propertyModel == null)
             {
@@ -126,7 +129,7 @@ namespace ProcessingApp.Controllers
                 return NotFound();
             }
 
-            var propertyModel = await _context.PropertyModel.FindAsync(id);
+            var propertyModel = await _context.PropertyCreateViewModel.FindAsync(id);
             if (propertyModel == null)
             {
                 return NotFound();
@@ -178,7 +181,7 @@ namespace ProcessingApp.Controllers
                 return NotFound();
             }
 
-            var propertyModel = await _context.PropertyModel
+            var propertyModel = await _context.PropertyCreateViewModel
                 .FirstOrDefaultAsync(m => m.PropertyId == id);
             if (propertyModel == null)
             {
@@ -193,15 +196,15 @@ namespace ProcessingApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var propertyModel = await _context.PropertyModel.FindAsync(id);
-            _context.PropertyModel.Remove(propertyModel);
+            var propertyModel = await _context.PropertyCreateViewModel.FindAsync(id);
+            _context.PropertyCreateViewModel.Remove(propertyModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyModelExists(int id)
         {
-            return _context.PropertyModel.Any(e => e.PropertyId == id);
+            return _context.PropertyCreateViewModel.Any(e => e.PropertyId == id);
         }
     }
 }
